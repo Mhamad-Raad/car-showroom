@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../core/widgets/grid_overlay.dart';
 import '../../core/widgets/lime_hero_card.dart';
-import '../../core/widgets/primary_button.dart';
 import '../../core/widgets/accent_chip.dart';
+import '../../core/widgets/slide_to_start.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/router/app_router.dart';
 
@@ -18,60 +19,87 @@ class SplashView extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                const SizedBox(height: 24),
+                const SizedBox(height: 10),
                 Text('RateCars',
-                    style: Theme.of(context).textTheme.headlineLarge),
-                const SizedBox(height: 20),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineLarge
+                        ?.copyWith(color: Colors.white, fontSize: 32)),
+
+                const SizedBox(height: 14),
+
                 Expanded(
                   child: LimeHeroCard(
                     overlayTopLeft: const AccentChip(
-                      label: 'Drive Your Way',
-                      icon: Icons.bolt,
-                    ),
+                        label: 'Drive Your Way', icon: Icons.bolt),
                     overlayBottom: const Row(
                       children: [
                         Icon(Icons.speed, color: Colors.black87),
-                        SizedBox(width: 8),
-                        Text('Fast • Clean • Fun',
-                            style: TextStyle(
+                        SizedBox(width: 10),
+                        Text(
+                          'Fast • Clean • Fun',
+                          style: TextStyle(
                               fontWeight: FontWeight.w700,
-                              color: Colors.black87,
-                            )),
+                              color: Colors.black87),
+                        ),
                       ],
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Stack(
                       children: [
-                        const Spacer(),
-                        Text(
-                          'Rate cars with style.',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge
-                              ?.copyWith(color: Colors.black, fontSize: 36),
+                        Positioned.fill(
+                          child: Opacity(
+                            opacity: 0.12,
+                            child: Image.network(
+                              'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1600&auto=format&fit=crop',
+                              fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) =>
+                                  const SizedBox.shrink(),
+                            ),
+                          ),
                         ),
-                        const SizedBox(height: 12),
-                        const Text(
-                          'Beautiful UI, smooth UX — front-end only.',
-                          style: TextStyle(color: Colors.black87),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Rate cars with style.',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge
+                                      ?.copyWith(
+                                          color: Colors.black, fontSize: 38),
+                                ),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  'Beautiful UI, smooth UX — front-end only.',
+                                  style: TextStyle(color: Colors.black87),
+                                ),
+                                const SizedBox(height: 8),
+                              ],
+                            ),
+                          ),
                         ),
-                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
-                PrimaryButton(
-                  label: 'Get Started',
-                  icon: Icons.arrow_forward,
-                  expanded: true,
-                  onPressed: () =>
+
+                const SizedBox(height: 18),
+
+                SlideToStart(
+                  label: 'Slide to get started',
+                  onComplete: () =>
                       Navigator.of(context).pushNamed(AppRoutes.login),
                 ),
-                const SizedBox(height: 24),
-                Text('Black + Neon Lime UI • MVC',
+
+                const SizedBox(height: 16),
+                Text('Black • Lime • MVC • Smooth',
                     style: Theme.of(context).textTheme.bodyMedium),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
               ],
             ),
           ),

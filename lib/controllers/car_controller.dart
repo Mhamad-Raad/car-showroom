@@ -30,9 +30,15 @@ class CarController extends ChangeNotifier {
   }
 
   Car? getById(String id) {
-    final car = _cars.firstWhere((c) => c.id == id, orElse: () => null as Car);
-    if (car == null) return null;
-    return car.withAggregates(_reviews[id] ?? const []);
+    Car? base;
+    for (final c in _cars) {
+      if (c.id == id) {
+        base = c;
+        break;
+      }
+    }
+    if (base == null) return null;
+    return base.withAggregates(_reviews[id] ?? const []);
   }
 
   List<Review> reviewsFor(String carId) =>

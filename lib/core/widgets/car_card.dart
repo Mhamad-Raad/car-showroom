@@ -30,18 +30,22 @@ class CarCard extends StatelessWidget {
           child: Row(
             children: [
               // Thumbnail
-              ClipRRect(
-                borderRadius: BorderRadius.circular(18),
-                child: AspectRatio(
-                  aspectRatio: 1.2,
-                  child: Image.network(
-                    car.heroImage,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
-                      color: const Color(0xFF0F1114),
-                      alignment: Alignment.center,
-                      child: const Icon(Icons.directions_car,
-                          size: 28, color: Colors.white70),
+              SizedBox(
+                width: 120,
+                height: 96,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(18),
+                  child: AspectRatio(
+                    aspectRatio: 1.2,
+                    child: Image.network(
+                      car.heroImage,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => Container(
+                        color: const Color(0xFF0F1114),
+                        alignment: Alignment.center,
+                        child: const Icon(Icons.directions_car,
+                            size: 28, color: Colors.white70),
+                      ),
                     ),
                   ),
                 ),
